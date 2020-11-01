@@ -1,0 +1,156 @@
+1.虚拟dom 是一种抽象层的js对象，当创建或更新dom时，react会更新虚拟dom，然后新旧虚拟dom进行比较，最追渲染为真实dom。
+ DOM操作都很有可能引起回流(Reflow)和重绘(Repain） 
+创建虚拟dom React.createElement('h1',{id:'abc'},'hello'}
+
+2.脚手架 create-react-app 
+Router包裹所有路由(BrowserRouter as Router)  Route是单个路由  Switch只能选择一个 exact精准匹配路由 
+HashRouter 会在端口号之后加个#号  使用BroswerRouter ，服务器需要配置
+NavLink可以设置active 而link则会加上相同的className
+prop.children它包含组件的开始标签和结束标签之间的内容
+
+3.fetch的使用方法  
+let content = {some: 'content'};
+fetch('some-url', {
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(content)
+}).then(res=>res.json()).then(data=>{console.log(data)})
+
+4.多个输入框获取数据 可以用用一个方法，写不同的data-id      
+ txtChange=(e)=>{
+
+let obj={}
+ 
+obj[e.target.dataset.id] = e.target.value
+ 
+ this.setState({
+ 
+movie:{
+  ...this.state.movie, 将对象打散
+
+  ...obj  将新加的替换之前的元素
+        }
+        })
+    }
+
+5.withRouter高阶组件 export default withRouter(App) 
+把不是路由切换过来的组件 把react-router的history、location、match传到props上
+高阶函数有 定时器 延时器 
+高阶组件有 connect withRouter
+
+6.父传子 在引入的子组件上把父亲的参数传过去  <child data={data} />  儿子可用props.data拿到
+  子传父  在引入的子组件上把父亲的方法传过去  <child  child={parent} > 父亲的方法为 const patent = (getdata)=>{}  
+  儿子用 props.child(senddata)传过去
+
+7.redux 组件状态共享
+  用户发出Action store.dispatch(action)   action有type值和payload ；
+store会调用reducer,reducer返回新的state；
+state发生变化，store会调用监听函数,store.subscribe( this.setState(store.getState))  
+store.getState()会得到当前的状态
+
+8.redux-thunk  因为redux 仅支持同步数据流 使用redux-thunk可以实现异步
+返回一个函数 
+
+9.redux-saga 把所有异步集中在sagas.js处理   saga通过genertor函数创建 
+ui 派发action 传入sagas sagas进行异步处理 再派发给reducer reducer处理返回state
+
+10.合并reducer  
+const reducer=  combineReducers({
+list,product
+})
+
+11.react-redux  （也要结合redux使用，store、reducer）
+ connect()(APP)生成容器组件
+ react-redux里有provider提供器,将容器组件包裹起来，让容器组件拿到state,
+ <Provider store={store}>
+
+    <App />
+  
+</Provider>
+connetxt(mapStateToProps,mapDispatchToProps)(App) 里有两个参数
+第一个参数把store里面的数据映射到props中
+ const mapStateToProps = (state) => 
+{
+  return state;
+};
+第二个参数 返回一个函数或者对象 主要用来派发action    以这种方式写入<p>{props.inputValue}</p>
+
+12.hooks
+(1)useContext 可用于组件间共享状态   在父组件里创建一个上下文  const childContext = createContext()
+通过这个上下文的Provider方法 传递数据
+<childContext.Provider value={count}
+<Child />
+      
+</childContext.Provider>
+在子组件里 可以使用上下文 const count = useContext(childContext) 取得传过来的数据
+(2）主要用在单组件复杂的数据状态管理
+const [count,dispatch] = useReducer((state,action)=>{},10)
+useReducer有两个参数,第一个为reducer,第二个为初始值
+useContext和useReducer结合实现redux的效果  
+(3)useState 返回一个state和更新state的函数 ，参数可写初始值
+合成事件和生命周期中是异步的
+原生事件中、settimeout setinterval 中是同步的
+(4)useEffect(()=>{},[]) 相当于componentDidMount 主要在此调接口  useEffect(()=>{return ()},[])相当于componentWillUnmount
+  useEffect(()=>{},[arr])相当于componentDidUpdate   
+(5)useMemo  为了解决不相关的函数不再触发 有依赖项 
+useEffect是在dom更新后运行 如果依赖的值没发生变化将不再渲染
+useMemo是在dom发生变化时执行
+(6)useRef 取到dom  <p ref={refs}></p>   useEffect(()=>{console.log(refs.current.innetText)})
+
+13.webpack
+打包工具  解决各种依赖关系,减少网络请求 通过安装loader解决浏览器不认识的东西 安装babel 将高版本ES转换为低版本
+
+14.umi 可插拔的企业级react应用框架
+优点:
+1.开箱即用 内置react、react-router等
+2.支持约定路由及配置路由（.umirc.ts）
+3.融合dva数据流
+4.生命周期完善的插件体系
+5.支持TS
+
+
+15.dva  基于redux redux-saga react-router 框架
+namespace命名空间 在model触发action type不需要加命名空间 在组件需要 { type: 'user/fetch' }
+state是状态的初始值
+reducer 类似redux 中的reducer 是唯一可以修改state的地方
+effects用于处理异步  由action触发 也可触发action 他可通过reducer修改state ,只能用generator函数
+有action 和 effects两个参数二个参数 
+effects 有三个字段，put 用于触发 action，call 用于调用异步处理逻辑（调接口），select 用于从 state 中获取数据。
+subscriptions用于订阅数据源,处理一些逻辑
+组件内用高阶组件connect连接组件
+在service.ts中 写调接口数据  可引入request 类似axio
+
+16.purComponent与component 功能基本相同  pur可以通过浅比较实现shouldComponentUpdate的功能，提升性能
+基本数据类型根据state的变化决定是否重新渲染。而引用类型地址变化才会重新render,当setState用扩展运算符时会改变地址
+。因为浅比较需要时间，所以pur不适合数据经常改变的情况，适合用展示组件
+
+17.diff算法   
+虚拟dom转成真实dom最少的操作过程称为调和,diff算法就是调和的具体实现
+diff策略： tree diff ： 跨层级操作少，基本可以忽略不计，可以用css方法，隐藏显示
+                 component diff : 同类组件 层级比较  不同类组件:会替换所有节点 可以通过shouldComponetUpdate减少不必要的更新
+                 element diff 通过唯一key值区分 有 删除、插入、移动三种方式 
+                 移动时  当前的index小于以前的index才会移动  这样当只有最后一个到第一个位置的话，需要另外几个节点全部向后移，影响性能
+            
+18.  react组件懒加载 
+  1.webpack+import
+   2.webpack+import  高阶组件
+  3.webpack+import+async  高阶函数
+  4.webpack+require.ensure 高阶组件
+
+19.1.混合开发   webview内嵌页面  或 整个页面由web开发
+      2.webApp  cordova打包到各个平台
+      3.原生   react-native  expo.io 在线编辑
+
+20.声明周期是到特定时间就会执行的钩子函数
+       17版本移除componentwillmount、componentwillrecieveprops 、componentwillupdate三个声明周期
+          增加 getDerivedStateFromProps(nexProps,prevState){} 可以控制props更新state
+           在初始化和update阶段触发
+          getsnapshotbeforeupdate       update后dom更新前调用    用于读取最新的dom数据
+21. super不写 在construct  拿不到Props 但是在construct 之外可以拿到       
+  
+
+
+
+     
