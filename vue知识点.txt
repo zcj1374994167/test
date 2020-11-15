@@ -1,8 +1,8 @@
 1.vue常见指令
     v-cloak解决标签闪烁  写到标签上 并在css上写 [v-clock]{display:none}
     绑定属性 v-bind: 简写为:
-     v-html 可以渲染数据，还可以解析标签，  v-html和{{}}仅能渲染数据
-     v-for 便利   v-model  表单 可以监听表单的值  
+     v-html 可以渲染数据，还可以解析标签，  v-text和{{}}仅能渲染数据
+     v-for 遍历  v-model  表单 可以监听表单的值  
      v-if  会控制dom节点的存在与否      v-show  通过display进行了元素的渲染
      v-on  简写为@    v-for='count in 10' 迭代数字     
 
@@ -67,6 +67,8 @@ Vue.prototype.$http = request
 20. $router 路由器 vueRouter的实例  可以实现跳转 this.$router.push  this.$router.replace 不会添加历史记录
   this.$router.go(n) 可前进或者后退
       $route 当前跳转的路由对象 可获取path .query等信息
+   hash  #及#后面的字符称为hash  只#号之前的内容会被包含在请求中 、
+  history 需要后端配置
 
 21.路由导航守卫 
     全局前置守卫 
@@ -85,3 +87,19 @@ Vue.prototype.$http = request
     ...mapGetters({'getCount':'user/getCount'}) 写在computed
       ...mapMutations({'addd':'user/add'}),写在methods
    ...mapActions({'commitAddd':'user/commitAdd'})写在methods
+应用场景 音乐播放 购物车
+22.vue数据双向绑定原理  
+     采用  数据劫持结合发布者订阅模式 通过Object.defineProperty()来劫持各个属性的setter、getter
+在数据发生变动时会发布消息给订阅者，触发相应的监听回调。双向绑定将MVVM作为数据绑定的入口，
+Observer监听数据变化，Compile解析指令，watcher搭建两者的桥梁，从而达到数据双向绑定。
+23.MVVM  model-view-viewModel   model数据模型 view代表ui组件  viewModel连接Model和view ， 处理用户交互，
+view数据改变会同步到model,model数据变化也会同步到view上。用了数据双向绑定原理
+24.vue与react的区别
+同:数据驱动 组件化 都有声明周期  都有虚拟dom
+不同  react单向数据流 vue指令
+25.自定义指令 全局 Vue.directive(name,{inserted(el){}})
+ 局部 directives:{name:{}}
+26.keep alive使用缓存 多用于表单  
+27.event loop 事件循环 浏览器或者node解决js单线程不会阻塞的机制  有宏任务 微任务
+
+

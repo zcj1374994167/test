@@ -1,0 +1,253 @@
+1.JS包括ES dom bom
+2.typeof null   object   typeof  NaN    number    typeof一个函数  'function'
+3.函数  由事件驱动或者被调用可重复执行的代码块  增加了复用性 减少代码冗余
+4.arguments是保存了所有实参的一个集合 用在函数内部 伪数组
+5.作用域 变量或者函数可以被访问到的范围
+6.在一个函数内部调用函数自身，那么这个函数称为递归函数
+7.构造函数 一个普通函数和new写在一起就称为构造函数 首字母大写
+8.访问对象的属性和方法  obj.a  obj.fun()   obj['a']  obj['fun']()   添加 或者修改obj.b=''  删除delete obj.c
+9.基本数据类型 number string boolean  symbol ES6新增一个基本类型  {}=>  true
+10.数组方法
+ push尾部添加元素 pop尾部删除一个元素  unshift头部添加 shift尾部删除
+slice 一个或两个参数 原数组不变  splice 1到3个参数 原数组改变 第二个参数表示个数
+sort 排序  arr.sort((a,b)=>a-b)
+数组翻转 arr.reverse() 
+数组拼接join()  
+数据合并 arr1.concat(arr2)  
+数组遍历 for 
+ES5新增  
+indexOf  取到某个元素在数组中的索引,没有则返回-1  
+forEach 遍历不接受返回值
+map 遍历  接受返回值
+filter  过滤出所有符合条件的元素  arr.filter(item=>item>3)
+some  一个元素满足条件 就为true
+every  所有元素均满足条件才为true
+reduce  arr.reduce((a,b)=>{})   a为上一次的返回值 b为当前元素
+数组扁平化  将一个多维数组变成一个一维数组   
+可以用扩展运算符  通过   [].concat(...arr)
+11数组排序方法  冒泡排序 选择排序
+12 引用类型 赋值给的是地址     栈区存放 变量名函数名 ，基本类型的值，引用类型的地址 
+                                                堆中存放 引用类型的值
+13.数组的去重 
+   （1）   遍历数组的元素，把数组中的元素作为一个对象的属性名，如果得到的是undefined，就把这个元素
+  赋一个不为undefined的值，并添加到一个新的数组中
+    （2）  遍历数组中的元素,并且新建一个数组，如果newArr.indef(arr[i])==-1,就添加到新数组
+      (3)     因为set的特性 直接将数组放入  var set = new Set(arr)
+14.严格模式 规避了代码不严谨不规范的地方 提高了安全性  提高了编译器的执行效率  
+15.字符串
+charAt  取到索引对应的字符
+indexOf 取到字符在字符串中索引 没有返回-1  同数组方法
+slice 同数组方法 
+substring 与slice基本上一样 不过里面参数会自动交换位置
+substr  第二个参数表示个数
+split 字符串以指定字符分割成数组
+replace(oldstr,newstr) 用新的替换旧的
+concat 合并 同数组方法
+charCodeAt(index) 取到index位置上字符的ASCII码
+fromCharCode(n) 通过字符编码n取到字符  是String自身的方法
+ES6 
+ str.includes('a') 是否包含某字符
+16. m-n 的随机数 
+Math.floor(Math.random()*(n-m+1)) + m
+17.bom 浏览器对象模型 
+   location.href 可以读到完整的路径，也可以赋个地址实现页面的跳转
+    scrollTop  可视区域距页面顶部的距离  兼容写法 documentElement.scrollTop||document.body.scrollTop
+    clientHeight  可视区域的宽度和高度  width+padding 
+    scrollHeight  元素内容真实的高度
+    offsetHeight Height+padding+border
+     offsetTop  当前元素到定位父节点的top方向的距离  到整个页面的顶部
+18.dom 文档对象模型
+      创建标签节点  document.createElement
+      创建文本节点  document.createTextNode
+      添加节点  document.body.appendChild1
+      查询dom   getElementById   getElementsByTagName  getElementsByClassName
+      getElementsByName  querySelectorAll   querySelector
+      obj.replaceChild(newNode,oldNode) 替换节点
+      odiv.cloneNode(true)  true 连子节点一起克隆
+      odiv.removeChild(span) 删除节点
+      
+      获取所有属性节点  oDiv.attributes 
+      获取某个节点属性值  oDiv.getAttribute('id')
+      增加及修改  setAttribute
+      删除 removeAttribute
+        
+       父节点 oDiv.parentNode
+       所有子节点  oDiv.childNodes
+       所有子元素节点  oDiv.children 
+       
+       oDiv.outerHTML  包括div的HTML结构
+       oDiv.innerHTML   div内部的HTML结构
+       oDiv.innerText  只有文本
+
+       文档碎片节点 document.createDocumentFragment  
+       将创建的li放入文档碎片节点 当全部创建完成后 一起给ul  减少页面重绘次数 提高性能
+  19. onload 是等页面所有元素加载完成后执行  jq里面$.ready 是dom加载完毕就执行 不包括图片，资源文件
+   20.事件对象是事件触发的时候产生的对象 
+       事件对象兼容 var evt = e||event
+       事件源兼容  var _target = evt.target||evt.srcElement
+       clientX 鼠标在可视区域的X坐标
+        screenX 鼠标在屏幕的X坐标 
+        offsetX    鼠标相对事件源的X坐标
+       pageX 鼠标相对于文档的X坐标    
+        得到按键的按键码  evt.keyCode||evt.which
+21. dom事件流 由 捕获，事件源，冒泡三部分组成  先捕获在冒泡  
+    普通事件 只支持冒泡 
+     阻止冒泡   if(evt.stopPropagation){evt.stopPropagation}else{evt.cancalBubble=true}
+22  阻止默认行为  evt.preventDefault()现代  evt.returnValue = false  IE低版本
+      return false 兼容性好
+23  dom二级事件 可以实现捕获 
+      现代浏览器
+      obj.addEventListener(event,fn,false)  false冒泡 true捕获
+       obj.removeEventListener(event,fn,false)   事件不需要加on
+       IE低版本   事件名称需加on
+       attachEvent 
+        detachEvent
+ 24 事件委托   利用事件冒泡，把本应该添加到某个dom事件上的对象，委托个它的父亲
+       如果该dom对象仍继续增加，仍可获取相同属性
+
+ 25. ES6 
+     let 存在块级作用域  不存在声明提升  会出现暂时性死区  不允许重复声明  不能当成window的属性
+     const 声明常量 不允许被更改
+     ...rest 剩余操作符
+     ...扩展运算符 可以解构
+     for of  for(let i of arr) 遍历数组
+     箭头函数
+    symbol 新增的基本数据类型  symbol的类型值是唯一的   let a = Symbol()  let b = Symbol()   a!=b
+    promise    async await  genarator  yiled   
+25.Promise.all()  
+     Promise.all([]) 方法返回一个 Promise 实例，此实例在 [] 参数内所有的 promise 都“完成（resolved）”
+    或参数中不包含 promise 时   回调完成（resolve）；如果参数中  promise 有一个失败（rejected），
+     此实例回调失败（reject），失败的原因是第一个失败 promise 的结果。
+
+它通常在启动多个异步任务并发运行并为其结果创建承诺之后使用，以便人们可以等待所有任务完成
+
+26 函数的this指向问题 
+普通函数谁调用就指向谁
+（1）  在一个函数里面被返回出去不算被调用 指向window（闭包）
+ （2） 在setTimout里面 仍然指向window  因为setTimeout是window的方法
+箭头函数  指向被定义时的this
+构造函数调用 指向实例对象
+  27.立即执行的匿名函数  （function(){console.log('aa')}}()
+  28.和this指向有关的三个方法  call apply bind
+
+   call  f1.call(f2,10,20) f1的this指向f2 参数是列表的形式,从第二个参数开始都是f1的参数  
+   apply  f1.call(f2,[10,20]) 参数是数组  可用来取数组最小值   Math.min.apply(null,arr)
+    bind   f1.bind(f2,10,20)  变成一个修改this指向的新函数
+  29.面向对象特点  封装，继承，多态
+       创建对象的方式 
+   
+
+   (1)    字面量  var obj = {}  代码冗余
+   (2）  工厂函数   var obj = new Object()   检测一个对象是否是Object这个类型的实例 i
+          obj instanceof Object    无法正常检测实例是哪个类型
+  (3)    构造函数  new出来的   function Person(){}  var person  = new Person   
+  (4)    原型对象,函数的一个属性，但这个属性是个对象。  prototype  function Person(){}   Person.prototype.age=  '20'  var person1 = new Peoson()
+          每一个构造函数都有一个原型对象,每一个原型对象都有一个指向构造函数的指针（construtor）,每一个实例都有一个内部指针(_proto_)指向原型对象
+ （5） 组合创建 属性放构造函数里 方法放原型上 
+  (6)    ES6   class创建  class Person{
+ 	                     constructor(){}
+                                      方法
+           }
+ 原型对象  
+           每个函数对象都有一个原型属性，这个属性以对象的形式存在，被称为原型对象。
+           原型对象有个指向构造函数的指针constructor 。
+             每个对象都有一个_proto_指向原型对象  ，继承是通过_proto_实现继承的
+          原型上面的属性和方法可以被实例共享
+
+          当访问一个对象的属性时，会先在这个对象的本身属性上去找，如果没有找到的话，到原型上去找，
+         再到原型的_proto_上去找  最终到Object.prototype._proto_===null,如果还没有则返回undefined
+
+30.ajax
+     异步的js和xml   通过异步模式，提升了用户体验，减轻了服务端的压力，减少了宽带的占用
+     最大特点是局部刷新
+     创建ajax对象  确定资源  发送请求 接受响应  
+    常用的状态码 200请求成功 301资源被转移 304使用缓存 403没权限 404资源不存在 500服务器错误
+   
+31. promise ES6 新增 异步编程的解决方案 解决回调函数嵌套的问题
+32.跨域  同源策略 协议 域名 端口号
+    （1）jsonp  借助script的属性请求服务器  后台把数据用一个函数名包起来  返回给前端 前端定义同名的函数 去接收
+       (2) cors 
+      (3)  配置跨域代理把v
+33.闭包 在一个函数外部能够访问其他函数内部局部变量的函数  
+优点:形成命名空间，减少全局变量的定义 ,减少代码的干扰
+缺点：会造成内存泄露
+34.继承 ：一个类型的对象能够访问另一个类型的属性和方法
+     （1）构造函数继承 f1.call(f2,10,20) 改变this指向
+        (2) 原型继承   child.prototype = new Patent（）
+      （3）组合继承  属性改变this指向  方法通过遍历父类的prototype 将父类的方法给到子类
+        (4)  寄生 通过Object的create方法 继承
+       （5）ES6继承 通过super  来继承
+35.深拷贝与浅拷贝
+     浅拷贝 拷贝的是地址  一方的改变会影响到另一方
+     深拷贝 拷贝的是指 一方的改变不会影响到另一方   
+     先判断这个数据是不是引用类型（typeof）   不是引用类型 就是简单的赋值 就可以 是引用类型 需要通过递归更深一步的把值赋出来
+    用JSON.stringfy 之后再用JSON.parse 也可以实现深拷贝
+36.person.hasOwnProperty("a") 判断一个属性是实例属性还是原型上的属性  或者判断一个自身属性是否存在
+     Object.defineProperty(对象,属性,{配置项})   设置一个对象的属性,让这个属性变得可配置
+ instanceof 判断一个对象是否是某个对象的实例   a intanceof  array 
+     
+37.设计模式  在项目开发中，一些解决问题的经验或者代码的优化方式
+    单例模式  保证一个类只有一个实例，并提供一个访问它的全局访问点  微信小程序
+    观察者模式（发布订阅） 一对多的依赖关系  一个对象的状态发生改变，所有依赖它的对象都将得到通知  vue数据双向绑定
+    适配器模式 将一个类的方法或属性转换成另一种方式以解决不兼容问题
+    组合模式（部分-整体） 将对象组合成树形结构表示'部分整体'的层次结构
+ 38. jquery.extend()扩展实例方法  jquery.fn.extend() 扩展自身原型方法
+39. nodejs 单线程 高并发 异步非阻塞  是js的运行环境 
+40.qs 用于解析和格式化 url 
+     qs.parse 能将?后面的字符串参数转换成对象
+     qs.stringify 可以将对象转换成字符串
+41.  git remote -v 查看远程关联
+       git remote rm origin 解除远程关联
+       git remote add origin ''关联远程
+       git push -u origin master 第一次推送
+       git clone -b '指定分支' ''
+       git checkout -b '' 创建并切换分支
+       git checkout ''  切换分支
+       git branch ''   创建分支
+       git merge ''  合并分支
+       git statuis 查看工作区作态
+       git log 历史版本
+       git  reflog  每一次的命令
+       2. git init  将这个目录变为Git可以管理的仓库
+       3. git add 将文件添加到仓库的暂存区   git add . 所有文件
+       4.git commit -m "" 将文件提交到仓库
+      5. git status 查看工作区的状态
+       6.git diff 查看修改内容
+       7.git log  历史版本记录 （可加上--pretty=oneline减少内容信息）
+        8.git reset --hard HEAD^ 回到上一个版本(git reset --hard HEAD~1)   HEAD的指向为当前版本
+       9.cat text.txt  查看text.txt里面的内容
+       10.git reset --hard 1094a  直接回到 commit id为1094a的版本      
+       13.git diff HEAD  -- text.txt   查看工作区和版本库最新版本的区别    一样的话什么都不会显示
+        14.git 是管理修改的 每次修改完都需要加入暂存区 ，否则不会commit成功
+       15.git checkout -- text.txt   git restore -- text.txt   
+          修改后还没有放到暂存区,撤销修改回到与版本库一样的状态
+           已经添加到暂存区之后作了修改,撤销修改后回到 加入到暂存区的状态
+          总之，就是让这个文件回到最近一次git commit或git add时的状态
+       16.git reset HEAD text.txt  将暂存区的内容 撤销掉退回到工作区   git restore -- unstage text.txt
+         此时暂存区是干净的  再用git checkout  撤销工作区的修改
+        17.rm text.txt 删除文件  再用git rm text.txt从版本库删除  再git commit
+         18. rm text.txt 删除后，再git checkout -- text.txt 可以把删除的文件恢复到最新版本
+         是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+       19.git pull origin 
+       42.gulp 自动化构建工具  特点:任务化,基于流 task  gulpfile.js   
+      gulp工作时会将本地文件读取到内存中进行处理，之后再将内存中的文件输出到本地
+
+43. 将复杂的东西模块拆分出去就叫模块化  降低了代码之间的干扰  体现了软件设计领域高内聚
+低耦合的特点
+   AMD require.js   用define定义模块  用return 暴露
+   CMD  sea.js       用define定义模块 用module.exports暴露
+   ES6   引用用import  暴露用export
+44. scss  less   都是css预处理器
+      定义变量  scss $  less @   
+      scss 支持条件语句
+45.Event loop  事件循环  浏览器或者node 解决js 单线程运行时 不会阻 塞的机制
+    js有一个 主线程 和 调用栈   js的单线程    分为异步任务和同步任务
+    js调用栈采取后进先出的规则,当函数执行时,会添加到栈的顶部，当调用栈执行完成后，
+   就会从栈顶移除
+    在js中有另种任务 宏任务 和 微任务 
+     宏任务 js代码  setTimeout setIntetval
+     微任务  promise 
+45 web安全问题 
+     xss共计 跨站脚本攻击  利用有安全漏洞的网站对html标签或者js进行攻击
+     sql注入 向服务器恶意提交sql查询代码  导致后台执行一些命令 导致原始逻辑被改变
+      

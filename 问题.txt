@@ -1,0 +1,11 @@
+1.antd  3.x 换成4.x后 有些API改动 特别是table 获取数据时 
+2.用高版本ES 用babel 来转换
+3.设置animation动画没效果  ketframes animation transform 均添加-webkit-
+4.effect 和 memo effect是在render之后执行的  memo是在render时执行
+5.lable的for 写成htmlfor
+
+变更前鼓楼区建宁路33号
+江宁区秣陵街道秣周东路
+
+两个项目小组  
+1个ui 两个前端 两个后端 一个原生  一个项目经理   7个 

@@ -1,0 +1,36 @@
+1.rem+vw   在根元素将font-size 设置为13.333vw ，设计稿通常是750换算下来就是13.33vw 这样用rem取值时可以把px除以100很方便
+2. IE  Trident   火狐 Gecko  safari Webkit  opera  Prosto  谷歌 Blink
+3.两栏布局  calc    左边固定宽度float:left 右边float-right  width:calc(100% -  px)
+    弹性盒  外层 dispaly flex 右边 flex为1
+4.将图片水平垂直居中 
+    水平居中 text-aline:center
+     垂直居中 在图片前或者后加一个span 给span写 height:100%  display:inline-block  vertical-align:middle
+   给img 写 vertical-aline:middle
+5.子元素的margin-top默认解析给父元素 
+   父元素变盒模型  浮动  overflow:hidde
+6.图片三像素 display:block 
+7.href 用来与引用资源确定关系  而src 加载到者之后，浏览器会加载该资源
+8.优化图片加载  图片懒加载 判断 图片到页面顶部  与滚动条加可视区域的距离
+9.外边距重叠 都是正 取最大值 一正一负 取和 都是负 取绝对值大的
+10.居中一个元素  
+（1）固定或者绝对定位 left 和 top 为50% margin-left,margn-top为-1/2宽高
+  (2) 或者 transfrom:translate
+ （3）不知道宽高的情况下 margin：auto  绝对定位或固定  left top bottom right 都为0
+11. em 是参考父元素 rem是参考根元素 vw vh 是参考视窗宽度 
+12BFC 独立的渲染区域 该区域内所有元素的布局不会影响到区域外的布局   根元素  浮动 绝对定位 相对定位  overflow-hidden
+13.语义化  有利于seo优化  有利于项目的开发维护   seo  结构表现行为相分离  a标签的title img的alt
+14.ie双边距bug  display:inline
+15常见的兼容问题 
+ 双边距bug
+ 3像素
+ ie默认行高 
+16.web标准 w3c 理解 
+ 标签闭合 结构表现相分离  使用外链CSS JS
+ 17. css hack
+  根据不同浏览器 写不同CSS样式 
+18.内联块  input img textarea button
+19.css继承  font-size font-family color 
+ 20.行内元素 margin top bottom  padding top bottom 会失效
+21.回流 当页面布局和几何属性需要重新构建称为回流  
+     重绘 当一些元素需要更新属性。这些属性仅仅是影响外观，不影响布局 
+    回流必引起重绘 重绘不一定引起回流
